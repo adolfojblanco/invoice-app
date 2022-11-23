@@ -1,0 +1,23 @@
+package es.adbweb.services;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import es.adbweb.entity.Client;
+import es.adbweb.models.dao.IClientDao;
+
+public class IClientServiceImpl implements IClientService{
+	
+	@Autowired
+	private IClientDao clientDao;
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Client> findAll() {
+		return clientDao.findAll();
+	}
+
+}

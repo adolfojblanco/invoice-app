@@ -1,0 +1,5 @@
+package es.adbweb.services;
+
+public class IClientServiceImpl {
+
+}
