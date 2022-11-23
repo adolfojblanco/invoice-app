@@ -1,5 +1,0 @@
-package es.adbweb.services;
-
-public interface IClientService {
-
-}
