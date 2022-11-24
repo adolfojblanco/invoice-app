@@ -4,5 +4,5 @@ export interface Client {
   surname1: string;
   surname2: string;
   email: string;
-  createAt: string;
+  createAt?: string;
 }

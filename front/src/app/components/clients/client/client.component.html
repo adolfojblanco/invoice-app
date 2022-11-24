@@ -1,0 +1,53 @@
+<div class="col-6 mx-auto">
+  <mat-card class="row animate__animated animate__fadeIn">
+    <mat-card-title class="py-3">{{formName}}</mat-card-title>
+    <hr>
+    <form class="form mt-5 col-12" [formGroup]="clientForm" (ngSubmit)="save()" autocomplete="off" class="mx-auto">
+      <mat-form-field class="full-width " appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input type="text" matInput placeholder="Introduce el Nombre" formControlName="name">
+        <mat-hint *ngIf="isValid('name')">
+          El nombre es <strong>Requerido</strong>
+        </mat-hint>
+      </mat-form-field>
+
+      <div class="row pt-3">
+        <div class="col">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Primer Apellido</mat-label>
+            <input type="email" matInput placeholder="Primer Apellido" formControlName="surname1">
+            <mat-hint *ngIf="isValid('surname1')">
+              Primer Apellido es <strong>Requerido</strong>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Segundo Apellido</mat-label>
+            <input type="email" matInput placeholder="Segundo Apellido" formControlName="surname2">
+            <mat-hint *ngIf="isValid('surname2')">
+              Segundo Apellido es <strong>Requerido</strong>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-form-field class="full-width pt-3" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput placeholder="Ej. pat@example.com" formControlName="email">
+        <mat-hint *ngIf="isValid('email')">
+          El email es requerido
+        </mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="my-4 me-2" type="button" routerLink="/clients">Cancelar</button>
+
+      <button mat-raised-button color="primary" class="my-4" type="submit"
+        [disabled]="clientForm.invalid">{{btnName}}</button>
+
+    </form>
+  </mat-card>
+
+
+</div>
