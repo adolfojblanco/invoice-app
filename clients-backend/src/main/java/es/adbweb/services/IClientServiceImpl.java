@@ -40,8 +40,7 @@ public class IClientServiceImpl implements IClientService {
 	@Override
 	@Transactional
 	public Client save(Client client) {
-
-		return null;
+		return clientDao.save(client);
 	}
 
 	/**

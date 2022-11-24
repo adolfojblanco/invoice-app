@@ -47,7 +47,8 @@ public class Client implements Serializable {
 	public void prePersist() {
 		createdAt = new Date();
 	}
-
+	
+	
 	public Long getId() {
 		return id;
 	}
