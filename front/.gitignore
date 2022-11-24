@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /bazel-out
+.DS_Store
 
 # Node
 /node_modules
