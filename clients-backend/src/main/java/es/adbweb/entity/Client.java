@@ -37,6 +37,8 @@ public class Client implements Serializable {
 	private String surname1;
 	private String surname2;
 
+	private String email;
+
 	@Column(name = "created_at")
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
@@ -76,6 +78,14 @@ public class Client implements Serializable {
 
 	public void setSurname2(String surname2) {
 		this.surname2 = surname2;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Date getCreatedAt() {
