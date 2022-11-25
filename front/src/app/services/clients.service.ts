@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
+
 import { environment } from 'src/environments/environment.prod';
 import { Client } from '../models/client';
-
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,7 @@ import { Client } from '../models/client';
 export class ClientsService {
   private urlEndPoint: string = `${environment.apiUrl}/clients`;
   private headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   /**
    * Obtiene todos los clientes
@@ -27,7 +29,13 @@ export class ClientsService {
    * @returns client
    */
   getClient(id: number): Observable<Client> {
-    return this.http.get<Client>(`${this.urlEndPoint}/${id}`, { headers: this.headers });
+    return this.http.get<Client>(`${this.urlEndPoint}/${id}`, { headers: this.headers }).pipe(
+      catchError((e) => {
+        this.router.navigate(['/clients']);
+        Swal.fire('Error al editar', e.error.message, 'error');
+        return throwError(() => e);
+      })
+    );
   }
 
   /**
