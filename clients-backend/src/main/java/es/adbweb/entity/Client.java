@@ -37,6 +37,7 @@ public class Client implements Serializable {
 	private String surname1;
 	private String surname2;
 
+	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Column(name = "created_at")
@@ -47,8 +48,7 @@ public class Client implements Serializable {
 	public void prePersist() {
 		createdAt = new Date();
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
