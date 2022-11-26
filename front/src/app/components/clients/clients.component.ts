@@ -19,6 +19,7 @@ export class ClientsComponent implements OnInit {
       Obtiene los clientes de la base ded datos
     */
     this.clientService.getAllClients().subscribe((res) => (this.dataSource = res));
+    this.clientService.getAllClientsPaginate(0).subscribe((res) => console.log(res));
   }
 
   /**

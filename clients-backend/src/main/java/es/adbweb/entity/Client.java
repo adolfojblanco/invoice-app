@@ -15,6 +15,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 /**
  * Class for client
@@ -32,12 +34,16 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column()
+	@Column(nullable = false)
+	@Size(min = 4, max = 30)
 	private String name;
+
+	@Column(nullable = false)
 	private String surname1;
 	private String surname2;
 
 	@Column(nullable = false, unique = true)
+	@Email
 	private String email;
 
 	@Column(name = "created_at")

@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   exports: [
     MatButtonModule,
@@ -26,6 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatExpansionModule,
     MatBadgeModule,
     MatDialogModule,
+    MatPaginatorModule,
   ],
 })
 export class MaterialModule {}

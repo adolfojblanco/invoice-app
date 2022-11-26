@@ -3,6 +3,8 @@ package es.adbweb.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +52,15 @@ public class IClientServiceImpl implements IClientService {
 	@Transactional
 	public void delete(Long id) {
 		clientDao.deleteById(id);
+	}
+
+	/**
+	 * Devuelve todos los clientes paginados
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Client> findAll(Pageable pageable) {
+		return clientDao.findAll(pageable);
 	}
 
 }
