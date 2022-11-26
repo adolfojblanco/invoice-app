@@ -4,5 +4,6 @@ export interface Client {
   surname1: string;
   surname2: string;
   email: string;
+  image?: string;
   createAt?: string;
 }

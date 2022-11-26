@@ -50,6 +50,8 @@ public class Client implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
+	private String image;
+
 	@PrePersist
 	public void prePersist() {
 		createdAt = new Date();
@@ -101,6 +103,14 @@ public class Client implements Serializable {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

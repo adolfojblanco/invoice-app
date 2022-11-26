@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientsService } from '../../services/clients.service';
 import { Client } from '../../models/client';
 import Swal from 'sweetalert2';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-clients',
@@ -19,7 +20,6 @@ export class ClientsComponent implements OnInit {
       Obtiene los clientes de la base ded datos
     */
     this.clientService.getAllClients().subscribe((res) => (this.dataSource = res));
-    this.clientService.getAllClientsPaginate(0).subscribe((res) => console.log(res));
   }
 
   /**
@@ -42,6 +42,12 @@ export class ClientsComponent implements OnInit {
         });
         this.dataSource = this.dataSource.filter((c) => c.id !== client.id);
       }
+    });
+  }
+  pageEvent: PageEvent;
+  handlePageEvent(e: PageEvent) {
+    this.clientService.getAllClientsPaginate(e.pageIndex).subscribe((res: any) => {
+      this.dataSource = res.content;
     });
   }
 }

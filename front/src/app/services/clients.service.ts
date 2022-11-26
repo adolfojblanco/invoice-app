@@ -29,12 +29,9 @@ export class ClientsService {
    * @returns client[]
    */
   getAllClientsPaginate(page: number): Observable<any[]> {
-    console.log('Me ejecuto');
     return this.http.get<any[]>(`${this.urlEndPoint}/page/${page}`).pipe(
       tap((res: any) => {
-        (res.content as Client[]).forEach((client) => {
-          console.log(client.name);
-        });
+        (res.content as Client[]).forEach((client) => {});
       })
     );
   }
@@ -100,6 +97,25 @@ export class ClientsService {
     return this.http.delete<Client>(`${this.urlEndPoint}/${id}`, { headers: this.headers }).pipe(
       catchError((e) => {
         this.router.navigate(['/clients']);
+        this.toastr.error(`${e.error.message}`, 'Error!');
+        return throwError(() => e);
+      })
+    );
+  }
+
+  /**
+   * Subida de image de un cliente
+   * @param file image
+   * @param id client id
+   * @returns client
+   */
+  uploadImage(file: File, id: number): Observable<Client> {
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append('id', id.toString());
+
+    return this.http.post<Client>(`${this.urlEndPoint}/upload`, formData).pipe(
+      catchError((e) => {
         this.toastr.error(`${e.error.message}`, 'Error!');
         return throwError(() => e);
       })
