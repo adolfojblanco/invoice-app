@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment.prod';
 import { Client } from '../models/client';
@@ -115,6 +115,7 @@ export class ClientsService {
     formData.append('id', id.toString());
 
     return this.http.post<Client>(`${this.urlEndPoint}/upload`, formData).pipe(
+      map((res: any) => res.client as Client),
       catchError((e) => {
         this.toastr.error(`${e.error.message}`, 'Error!');
         return throwError(() => e);
