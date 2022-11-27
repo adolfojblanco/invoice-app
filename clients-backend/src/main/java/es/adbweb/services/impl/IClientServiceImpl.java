@@ -1,4 +1,4 @@
-package es.adbweb.services;
+package es.adbweb.services.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.adbweb.entity.Client;
 import es.adbweb.models.dao.IClientDao;
+import es.adbweb.services.IClientService;
 
 @Service
 public class IClientServiceImpl implements IClientService {
