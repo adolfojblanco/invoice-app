@@ -7,10 +7,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./shared.component.css'],
 })
 export class SharedComponent implements OnInit {
-  user_name: string;
+  user_name: string = '';
 
   constructor(private autServices: AuthService) {}
-  
+
   ngOnInit(): void {
     const { user_name } = this.autServices.getLogedUser();
     this.user_name = user_name;

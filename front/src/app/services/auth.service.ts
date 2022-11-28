@@ -97,10 +97,15 @@ export class AuthService {
     return false;
   }
 
+  /**
+   * Obtenemos el token y si no esta expirados devolcemos el usario decodificado
+   * @returns
+   */
   getLogedUser(): any {
     const token = localStorage.getItem('token');
+    const now = new Date().getTime() / 1000;
     if (token) {
-      const decoded = jwt_decode(token);
+      const decoded: any = jwt_decode(token);
       return decoded;
     }
     return null;

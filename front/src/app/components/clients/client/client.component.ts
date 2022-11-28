@@ -59,7 +59,7 @@ export class ClientComponent implements OnInit {
 
     this.clientService.createNewClient(this.clientForm.value).subscribe((res: any) => {
       Swal.fire('Nuevo Cliente', `${res.client.name}, creado correctamente`, 'success');
-      this.router.navigate(['/clients']);
+      this.router.navigate(['/home/clients']);
     });
   }
 
