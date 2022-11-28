@@ -1,10 +1,12 @@
-<mat-card>
-  <mat-card-title>Login</mat-card-title>
-  <mat-card-content>
+<div class="col-3 mx-auto">
+  <mat-card class="row">
+    <mat-card-title class="p-3">
+      <h1>Inicio de Sesión</h1>
+    </mat-card-title>
     <form [formGroup]="formLogin" (ngSubmit)="login()" autocomplete="off">
       <p>
-        <mat-form-field>
-          <input type="text" matInput placeholder="Usuario" formControlName="username">
+        <mat-form-field class="full-width" appearance="fill">
+          <input type="text" matInput placeholder="Usuario" formControlName="username" class="full-width">
           <mat-hint *ngIf="isValid('username')">
             El campo es requerido <strong>Requerido</strong>
           </mat-hint>
@@ -12,7 +14,7 @@
       </p>
 
       <p>
-        <mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
           <input type="password" matInput placeholder="Contraseña" formControlName="password">
           <mat-hint *ngIf="isValid('password')">
             El campo es requerido <strong>Requerido</strong>
@@ -20,9 +22,11 @@
         </mat-form-field>
       </p>
       <div class="button">
-        <button type="submit" mat-raised-button color="primary">Entrar</button>
+        <button type="submit" mat-raised-button color="primary" class="my-3 full-width"
+          [disabled]="formLogin.invalid">Entrar</button>
       </div>
 
     </form>
-  </mat-card-content>
-</mat-card>
+  </mat-card>
+
+</div>

@@ -39,8 +39,8 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   formLogin: FormGroup = this.fb.group({
-    username: ['ajblanco156', [Validators.required]],
-    password: ['12345', [Validators.required]],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
   });
 
   login() {
@@ -50,9 +50,8 @@ export class LoginComponent {
     }
 
     this.authService.login(this.formLogin.value).subscribe((res) => {
-      console.log(res);
       if (res.access_token) {
-        this.router.navigate(['./home/clientes/listado']);
+        this.router.navigate(['./home/']);
       }
     });
   }

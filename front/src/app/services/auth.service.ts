@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { tap } from 'rxjs';
 import { Auth } from '../models/auth';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -32,12 +33,17 @@ export class AuthService {
         headers: httpHeaders,
       })
       .pipe(
-        tap((resp: any) => localStorage.setItem('token', resp.access_token)),
+        tap((resp: any) => {
+          localStorage.setItem('token', resp.access_token),
+            Swal.fire({
+              icon: 'success',
+              title: `Bienvenido ${login.username}`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+        }),
         tap((resp: any) => (this._auth = resp))
       );
-
-    console.log(res);
-
     return res;
   }
 

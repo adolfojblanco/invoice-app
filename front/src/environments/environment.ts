@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api',
   oauthUrl: 'http://localhost:8080/oauth',
-  credentials: btoa('angularapp' + ':' + '12345'),
+  credentials: btoa('invoice-app' + ':' + '123456'),
 };
 
 /*

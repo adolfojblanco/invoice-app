@@ -3,7 +3,7 @@
     <mat-card-title class="py-3">{{formName}}</mat-card-title>
     <hr>
     <form class="form mt-5 col-12" [formGroup]="clientForm" (ngSubmit)="save()" autocomplete="off" class="mx-auto">
-      <mat-form-field class="full-width " appearance="fill">
+      <mat-form-field class="full-width" appearance="fill">
         <mat-label>Nombre</mat-label>
         <input type="text" matInput placeholder="Introduce el Nombre" formControlName="name">
         <mat-hint *ngIf="isValid('name')">
@@ -45,8 +45,8 @@
 
       <button mat-raised-button color="primary" class="my-4" type="submit"
         [disabled]="clientForm.invalid">{{btnName}}</button>
-
     </form>
+  
   </mat-card>
 
 
