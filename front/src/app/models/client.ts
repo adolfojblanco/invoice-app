@@ -1,3 +1,4 @@
+import { Invoice } from './invoice';
 export class Client {
   id: number;
   name: string;
@@ -5,5 +6,6 @@ export class Client {
   surname2: string;
   email: string;
   image?: string;
+  invoices: Invoice[] = [];
   createAt?: string;
 }

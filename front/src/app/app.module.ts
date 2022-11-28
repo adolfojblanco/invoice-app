@@ -11,7 +11,9 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './components/auth/auth.component';
-
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs);
 @NgModule({
   declarations: [AppComponent, ClientsComponent, AuthComponent],
   imports: [

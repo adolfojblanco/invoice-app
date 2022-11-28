@@ -79,7 +79,7 @@ export class AuthService {
         showConfirmButton: false,
         timer: 1500,
       });
-      this.router.navigate(['./auth/login']);
+      this.router.navigate(['/auth/login']);
       return true;
     }
     return false;
@@ -103,7 +103,6 @@ export class AuthService {
    */
   getLogedUser(): any {
     const token = localStorage.getItem('token');
-    const now = new Date().getTime() / 1000;
     if (token) {
       const decoded: any = jwt_decode(token);
       return decoded;

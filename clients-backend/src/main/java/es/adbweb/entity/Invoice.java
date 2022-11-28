@@ -68,7 +68,7 @@ public class Invoice implements Serializable {
 	 * 
 	 * @return
 	 */
-	public Double grandTotal() {
+	public Double getGrandTotal() {
 		Double total = 0.00;
 		for (InvoiceItem item : items) {
 			total += item.getTotal();

@@ -19,5 +19,7 @@ public interface IClientService {
 	
 	public void delete(Long id);
 	
+	
+	
 
 }
