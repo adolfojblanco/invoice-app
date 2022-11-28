@@ -1,4 +1,4 @@
-<button mat-stroked-button color="primary" class="mb-2" [routerLink]="['/clients']">Volver</button>
+<button mat-stroked-button color="primary" class="mb-2" [routerLink]="['/home/clients']">Volver</button>
 <div class="row">
   <div class="col-3">
     <mat-card class="example-card">
@@ -6,7 +6,7 @@
         <mat-card-title class="">{{client.name}} {{client.surname1}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <img class="img" [src]="'http://localhost:8080/api/clients/image/' + client.image" alt="Photo of a Shiba Inu">
+        <img class="img" [src]="'http://localhost:8080/api/clients/image/' + client.image" alt="{{client.name}}">
       </mat-card-content>
       <mat-card-actions>
 

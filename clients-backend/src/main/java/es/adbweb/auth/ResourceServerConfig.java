@@ -22,7 +22,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/clients").permitAll().anyRequest().authenticated()
+		http.authorizeRequests()
+		.antMatchers(HttpMethod.GET, "/api/clients/image/**").permitAll()
+		.anyRequest().authenticated()
 				.and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 

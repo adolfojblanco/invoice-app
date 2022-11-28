@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -6,8 +6,15 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './shared.component.html',
   styleUrls: ['./shared.component.css'],
 })
-export class SharedComponent {
+export class SharedComponent implements OnInit {
+  user_name: string;
+
   constructor(private autServices: AuthService) {}
+  
+  ngOnInit(): void {
+    const { user_name } = this.autServices.getLogedUser();
+    this.user_name = user_name;
+  }
 
   logout() {
     this.autServices.logout();

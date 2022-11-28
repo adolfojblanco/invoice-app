@@ -4,9 +4,9 @@ import { catchError, map, Observable, tap, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment.prod';
 import { Client } from '../models/client';
-import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,14 +14,26 @@ import { ToastrService } from 'ngx-toastr';
 export class ClientsService {
   private urlEndPoint: string = `${environment.apiUrl}/clients`;
   private headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastr: ToastrService,
+    private authService: AuthService
+  ) {}
 
   /**
    * Obtiene todos los clientes
    * @returns client[]
    */
   getAllClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.urlEndPoint}`);
+    return this.http
+      .get<Client[]>(`${this.urlEndPoint}`, { headers: this.authService.getToken() })
+      .pipe(
+        catchError((e) => {
+          this.authService.isNotAuthorize(e);
+          return throwError(() => e);
+        })
+      );
   }
 
   /**
@@ -30,6 +42,10 @@ export class ClientsService {
    */
   getAllClientsPaginate(page: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.urlEndPoint}/page/${page}`).pipe(
+      catchError((e) => {
+        this.authService.isNotAuthorize(e);
+        return throwError(() => e);
+      }),
       tap((res: any) => {
         (res.content as Client[]).forEach((client) => {});
       })
@@ -42,13 +58,15 @@ export class ClientsService {
    * @returns client
    */
   getClient(id: number): Observable<Client> {
-    return this.http.get<Client>(`${this.urlEndPoint}/${id}`, { headers: this.headers }).pipe(
-      catchError((e) => {
-        this.router.navigate(['/clients']);
-        this.toastr.error(`${e.error.message}`, 'Error!');
-        return throwError(() => e);
-      })
-    );
+    return this.http
+      .get<Client>(`${this.urlEndPoint}/${id}`, { headers: this.authService.getToken() })
+      .pipe(
+        catchError((e) => {
+          this.router.navigate(['/clients']);
+          this.authService.isNotAuthorize(e);
+          return throwError(() => e);
+        })
+      );
   }
 
   /**
@@ -57,16 +75,18 @@ export class ClientsService {
    * @returns client
    */
   createNewClient(client: Client): Observable<Client> {
-    return this.http.post<Client>(`${this.urlEndPoint}`, client, { headers: this.headers }).pipe(
-      catchError((e) => {
-        if (e.error.error.includes('Duplicate')) {
-          this.toastr.error(`Este email ya esta registrado`, 'Error!');
+    return this.http
+      .post<Client>(`${this.urlEndPoint}`, client, { headers: this.authService.getToken() })
+      .pipe(
+        catchError((e) => {
+          if (e.error.error.includes('Duplicate')) {
+            this.toastr.error(`Este email ya esta registrado`, 'Error!');
+            return throwError(() => e);
+          }
+          this.authService.isNotAuthorize(e);
           return throwError(() => e);
-        }
-        this.toastr.error(`${e.error.message}`, 'Error!');
-        return throwError(() => e);
-      })
-    );
+        })
+      );
   }
 
   /**
@@ -77,12 +97,12 @@ export class ClientsService {
   editClient(client: Client): Observable<Client> {
     return this.http
       .put<Client>(`${this.urlEndPoint}/${client.id}`, client, {
-        headers: this.headers,
+        headers: this.authService.getToken(),
       })
       .pipe(
         catchError((e) => {
           this.router.navigate(['/clients']);
-          this.toastr.error(`${e.error.message}`, 'Error!');
+          this.authService.isNotAuthorize(e);
           return throwError(() => e);
         })
       );
@@ -94,13 +114,15 @@ export class ClientsService {
    * @returns id
    */
   deleteClient(id: number): Observable<Client> {
-    return this.http.delete<Client>(`${this.urlEndPoint}/${id}`, { headers: this.headers }).pipe(
-      catchError((e) => {
-        this.router.navigate(['/clients']);
-        this.toastr.error(`${e.error.message}`, 'Error!');
-        return throwError(() => e);
-      })
-    );
+    return this.http
+      .delete<Client>(`${this.urlEndPoint}/${id}`, { headers: this.authService.getToken() })
+      .pipe(
+        catchError((e) => {
+          this.router.navigate(['/clients']);
+          this.authService.isNotAuthorize(e);
+          return throwError(() => e);
+        })
+      );
   }
 
   /**
@@ -110,16 +132,24 @@ export class ClientsService {
    * @returns client
    */
   uploadImage(file: File, id: number): Observable<Client> {
+    const token = localStorage.getItem('token');
+    const httpHeaders = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
     let formData = new FormData();
     formData.append('file', file);
     formData.append('id', id.toString());
 
-    return this.http.post<Client>(`${this.urlEndPoint}/upload`, formData).pipe(
-      map((res: any) => res.client as Client),
-      catchError((e) => {
-        this.toastr.error(`${e.error.message}`, 'Error!');
-        return throwError(() => e);
-      })
-    );
+    return this.http
+      .post<Client>(`${this.urlEndPoint}/upload`, formData, { headers: httpHeaders })
+      .pipe(
+        map((res: any) => res.client as Client),
+        catchError((e) => {
+          console.log(e);
+          //this.authService.isNotAuthorize(e);
+          return throwError(() => e);
+        })
+      );
   }
 }

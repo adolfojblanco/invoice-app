@@ -41,12 +41,13 @@
         </mat-hint>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" class="my-4 me-2" type="button" routerLink="/clients">Cancelar</button>
+      <button mat-raised-button color="primary" class="my-4 me-2" type="button"
+        [routerLink]="'/home/clients'">Cancelar</button>
 
       <button mat-raised-button color="primary" class="my-4" type="submit"
         [disabled]="clientForm.invalid">{{btnName}}</button>
     </form>
-  
+
   </mat-card>
 
 

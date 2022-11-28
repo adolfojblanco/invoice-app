@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
@@ -35,8 +35,15 @@ import { Router } from '@angular/router';
     `,
   ],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    /** Si el usuario ya esta autenticado redirigimos al inicio */
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['./home/']);
+    }
+  }
 
   formLogin: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
