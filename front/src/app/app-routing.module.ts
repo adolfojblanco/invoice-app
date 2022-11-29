@@ -13,6 +13,12 @@ const routes: Routes = [
     loadChildren: () => import('./components/auth/auth.module').then((a) => a.AuthModule),
   },
   {
+    path: 'invoice',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./components/invoices/invoices.module').then((i) => i.InvoicesModule),
+  },
+  {
     path: '**',
     redirectTo: 'auth',
   },

@@ -29,7 +29,6 @@ export class ClientDetailsComponent implements OnInit {
       .subscribe((client) => {
         this.client = client;
         this.dataSource = client.invoices;
-        console.log(this.client);
       });
   }
 

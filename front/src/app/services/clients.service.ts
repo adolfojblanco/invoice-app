@@ -13,7 +13,6 @@ import { AuthService } from './auth.service';
 })
 export class ClientsService {
   private urlEndPoint: string = `${environment.apiUrl}/clients`;
-  private headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(
     private http: HttpClient,
     private router: Router,

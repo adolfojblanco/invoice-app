@@ -6,16 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './components/material/material.module';
-import { HomeComponent } from './components/home/home.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './components/auth/auth.component';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+
+import { SharedComponent } from './components/shared/shared.component';
 registerLocaleData(localeEs);
 @NgModule({
-  declarations: [AppComponent, ClientsComponent, AuthComponent],
+  declarations: [
+    AppComponent,
+    AuthComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
