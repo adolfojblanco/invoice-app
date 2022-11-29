@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InvoicesService } from 'src/app/services/invoices.service';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
+import { Invoice } from '../../../models/invoice';
 
 @Component({
   selector: 'app-invoice-details',
@@ -7,8 +10,16 @@ import { InvoicesService } from 'src/app/services/invoices.service';
   styles: [],
 })
 export class InvoiceDetailsComponent implements OnInit {
-  constructor(private invoiceService: InvoicesService) {}
+  invoice: Invoice;
+
+  constructor(private invoiceService: InvoicesService, private activatedRoute: ActivatedRoute) {}
+
   ngOnInit(): void {
-    this.invoiceService.getAllInvoice().subscribe((res) => console.log(res));
+    this.activatedRoute.params
+      .pipe(switchMap(({ id }) => this.invoiceService.getInvoice(id)))
+      .subscribe((res) => {
+        this.invoice = res;
+        console.log(res);
+      });
   }
 }

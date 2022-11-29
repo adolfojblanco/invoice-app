@@ -19,4 +19,15 @@ export class InvoicesService {
       headers: this.authService.getToken(),
     });
   }
+
+  /**
+   * Obtiene una factura por su id
+   * @param id invoice
+   * @returns invoice
+   */
+  getInvoice(id: number): Observable<Invoice> {
+    return this.http.get<Invoice>(`${this.urlEndPoint}/${id}`, {
+      headers: this.authService.getToken(),
+    });
+  }
 }

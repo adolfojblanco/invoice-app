@@ -4,7 +4,7 @@ export class Invoice {
   id: number;
   description: string;
   comment: string;
-  createAt: string;
+  createdAt: string;
   updatedAt: string;
   grandTotal: number;
   client: Client;
