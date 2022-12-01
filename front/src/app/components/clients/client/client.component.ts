@@ -21,7 +21,9 @@ export class ClientComponent implements OnInit {
     private clientService: ClientsService,
     private router: Router,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.client = new Client();
+  }
 
   ngOnInit(): void {
     if (this.router.url.includes('edit')) {
@@ -46,12 +48,14 @@ export class ClientComponent implements OnInit {
     surname2: ['', [Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     createdAt: [],
+    invoices: [],
+    image: [],
   });
 
   save() {
     if (this.clientForm.controls['id'].value) {
       this.clientService.editClient(this.client).subscribe((res: any) => {
-        this.router.navigate(['/clients']);
+        this.router.navigate(['/home/clients']);
         Swal.fire('Edición de Cliente', `${res.client.name}, editado correctamente`, 'success');
       });
       return;

@@ -56,7 +56,6 @@ export class AuthService {
   getToken() {
     const token: any = localStorage.getItem('token');
     const decoded: any = jwt_decode(token);
-    console.log(decoded);
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
