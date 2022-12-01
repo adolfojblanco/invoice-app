@@ -23,16 +23,17 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/api/clients/image/**").permitAll()
-		.anyRequest().authenticated()
-				.and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		.antMatchers("/api/clients/image/**").permitAll()
+//		.antMatchers(HttpMethod.GET, "/api/clients/**").hasAnyRole("ADMIN, USER")
+//		.antMatchers(HttpMethod.GET, "/api/clients/**").hasRole("ADMIN")
+		.anyRequest().authenticated();
 	}
 
 	@Bean
 	public CorsConfigurationSource corsConfiguationSource() {
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowedOrigins(
-				Arrays.asList("http://127.0.0.1:5173", "http://localhost:4200", "http://localhost:8100"));
+				Arrays.asList("http://localhost:4200"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));

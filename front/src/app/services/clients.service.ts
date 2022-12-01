@@ -4,8 +4,7 @@ import { catchError, map, Observable, tap, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment.prod';
 import { Client } from '../models/client';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router'; 
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -16,7 +15,6 @@ export class ClientsService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private toastr: ToastrService,
     private authService: AuthService
   ) {}
 
@@ -79,7 +77,6 @@ export class ClientsService {
       .pipe(
         catchError((e) => {
           if (e.error.error.includes('Duplicate')) {
-            this.toastr.error(`Este email ya esta registrado`, 'Error!');
             return throwError(() => e);
           }
           this.authService.isNotAuthorize(e);

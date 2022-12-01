@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Required;
+
 /**
  * @author adolfob
  *
@@ -35,8 +37,19 @@ public class User implements Serializable {
 
 	private Boolean enabled;
 
+	@Column(nullable = false)
+	private String name;
+
+	@Column(nullable = false)
+	private String surname1;
+
+	private String surname2;
+
+	@Column(nullable = false, unique = true)
+	private String email;
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Role> roles;
+	private List<Rol> rols;
 
 	private static final long serialVersionUID = 1L;
 
@@ -50,6 +63,38 @@ public class User implements Serializable {
 
 	public String getUsername() {
 		return username;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname1() {
+		return surname1;
+	}
+
+	public void setSurname1(String surname1) {
+		this.surname1 = surname1;
+	}
+
+	public String getSurname2() {
+		return surname2;
+	}
+
+	public void setSurname2(String surname2) {
+		this.surname2 = surname2;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setUsername(String username) {
@@ -72,12 +117,12 @@ public class User implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	public List<Rol> getRols() {
+		return rols;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRols(List<Rol> rols) {
+		this.rols = rols;
 	}
 
 }

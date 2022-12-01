@@ -2,17 +2,24 @@
   <mat-sidenav #sidenav mode="push">
     <mat-toolbar color="primary">
       <span>Menú</span>
-      <span class="spacer"></span>
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>menu</mat-icon>
       </button>
     </mat-toolbar>
 
     <mat-nav-list>
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="clients" class="spacer">
+      
+
+      <a mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>list</mat-icon>
+        <span>Escritorio</span>
+      </a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="clients">
         <mat-icon mat-list-icon>list</mat-icon>
         <span>Listado Clientes</span>
       </a>
+
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="./categories/list">
         <mat-icon mat-list-icon>list</mat-icon>

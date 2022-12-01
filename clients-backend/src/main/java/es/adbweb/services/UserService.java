@@ -36,12 +36,14 @@ public class UserService implements UserDetailsService {
 		/**
 		 * Convertimos los roles a SimpleGrantedAuthority y se lo pasamos al objeto de usuario de spring
 		 */
-		List<GrantedAuthority> authorities = user.getRoles()
+		List<GrantedAuthority> authorities = user.getRols()
 				.stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName()))
+				.peek(authority -> logger.info("Role : " + authority.getAuthority()))
 				.collect(Collectors.toList());
 
 		return new User(user.getUsername(), user.getPassword(), user.getEnabled(), true, true, true, authorities);
 	}
+
 
 }

@@ -30,4 +30,12 @@ export class InvoicesService {
       headers: this.authService.getToken(),
     });
   }
+
+  /**
+   * Elimina una factura
+   * @param id de la factura
+   */
+  deleteInvoice(id: number) {
+    return this.http.delete(`${this.urlEndPoint}/${id}`, { headers: this.authService.getToken() });
+  }
 }
