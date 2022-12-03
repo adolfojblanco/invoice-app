@@ -33,7 +33,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public CorsConfigurationSource corsConfiguationSource() {
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowedOrigins(
-				Arrays.asList("http://localhost:4200"));
+				Arrays.asList("http://localhost:4200", "https://invoice.querotemoito.es"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));

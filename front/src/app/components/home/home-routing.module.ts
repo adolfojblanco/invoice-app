@@ -23,6 +23,11 @@ const routes: Routes = [
         loadChildren: () => import('../invoices/invoices.module').then((i) => i.InvoicesModule),
       },
       {
+        path: 'products',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../products/products.module').then((p) => p.ProductsModule),
+      },
+      {
         path: '**',
         redirectTo: 'home',
       },

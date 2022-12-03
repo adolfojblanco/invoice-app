@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api',
-  oauthUrl: 'http://localhost:8080/oauth',
+  apiUrl: 'http://82.223.1.243:8080/api',
+  oauthUrl: 'http://82.223.1.243:8080/oauth',
   credentials: btoa('invoice-app' + ':' + '123456'),
 };
 
