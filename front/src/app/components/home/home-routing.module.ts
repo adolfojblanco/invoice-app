@@ -10,6 +10,10 @@ const routes: Routes = [
     component: SharedComponent,
     children: [
       {
+        path: '',
+        component: HomeComponent,
+      },
+      {
         path: 'clients',
         loadChildren: () => import('../clients/clients.module').then((m) => m.ClientsModule),
       },
@@ -18,11 +22,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () => import('../invoices/invoices.module').then((i) => i.InvoicesModule),
       },
+      {
+        path: '**',
+        redirectTo: 'home',
+      },
     ],
-  },
-  {
-    path: '**',
-    redirectTo: 'home',
   },
 ];
 

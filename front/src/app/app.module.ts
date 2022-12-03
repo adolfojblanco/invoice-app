@@ -10,11 +10,13 @@ import { AuthComponent } from './components/auth/auth.component';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 
-import { ProductsComponent } from './components/products/products.component';
 import { MaterialModule } from './components/material/material.module';
+import { SharedComponent } from './components/shared/shared.component';
+import { HomeComponent } from './components/home/home.component';
+
 registerLocaleData(localeEs);
 @NgModule({
-  declarations: [AppComponent, AuthComponent, ProductsComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
