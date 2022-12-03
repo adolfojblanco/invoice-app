@@ -14,15 +14,11 @@ const routes: Routes = [
         loadChildren: () => import('../clients/clients.module').then((m) => m.ClientsModule),
       },
       {
-        path: '',
-        component: HomeComponent,
+        path: 'invoice',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../invoices/invoices.module').then((i) => i.InvoicesModule),
       },
     ],
-  },
-  {
-    path: 'invoice',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('../invoices/invoices.module').then((i) => i.InvoicesModule),
   },
   {
     path: '**',

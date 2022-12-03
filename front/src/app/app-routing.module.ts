@@ -4,7 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     canActivate: [AuthGuard],
     loadChildren: () => import('./components/home/home.module').then((m) => m.HomeModule),
   },
@@ -19,9 +19,15 @@ const routes: Routes = [
       import('./components/invoices/invoices.module').then((i) => i.InvoicesModule),
   },
   {
-    path: '**',
-    redirectTo: 'auth',
+    path: 'products',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./components/products/products.module').then((p) => p.ProductsModule),
   },
+  // {
+  //   path: '**',
+  //   redirectTo: 'auth',
+  // },
 ];
 
 @NgModule({
