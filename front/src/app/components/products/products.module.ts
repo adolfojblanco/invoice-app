@@ -5,12 +5,10 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductComponent } from './product/product.component';
 import { MaterialModule } from '../material/material.module';
 import { ProductsComponent } from './products.component';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ProductComponent],
-  imports: [CommonModule, ProductsRoutingModule],
+  declarations: [ProductComponent, ProductsComponent],
+  imports: [CommonModule, ProductsRoutingModule, MaterialModule, ReactiveFormsModule],
 })
 export class ProductsModule {}

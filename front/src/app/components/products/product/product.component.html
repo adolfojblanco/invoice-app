@@ -1,1 +1,33 @@
-<p>product works!</p>
+<div class="col-6 mx-auto">
+  <mat-card class="row animate__animated animate__fadeIn">
+    <mat-card-title class="py-3">{{formName}}</mat-card-title>
+    <hr>
+    <form class="form mt-5 col-12" [formGroup]="productForm" (ngSubmit)="save()" autocomplete="off" class="mx-auto">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input type="text" matInput placeholder="Introduce el Nombre" formControlName="name">
+        <mat-hint *ngIf="isValid('name')">
+          El nombre es <strong>Requerido</strong>
+        </mat-hint>
+      </mat-form-field>
+
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Precio</mat-label>
+        <input type="number" matInput placeholder="Introduce el precio" formControlName="price">
+        <mat-hint *ngIf="isValid('name')">
+          El precio es <strong>Requerido</strong>
+        </mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="my-4 me-2" type="button"
+        [routerLink]="'/home/clients'">Cancelar</button>
+
+      <button mat-raised-button color="primary" class="my-4" type="submit"
+        [disabled]="productForm.invalid">Guardar</button>
+    </form>
+
+  </mat-card>
+
+
+</div>

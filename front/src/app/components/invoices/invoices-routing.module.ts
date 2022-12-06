@@ -7,7 +7,6 @@ import { InvoiceComponent } from './invoice/invoice.component';
 const routes: Routes = [
   {
     path: '',
-    component: InvoicesComponent,
     children: [
       {
         path: 'details/:id',
@@ -16,10 +15,6 @@ const routes: Routes = [
       {
         path: 'new',
         component: InvoiceComponent,
-      },
-      {
-        path: 'new',
-        component: InvoiceDetailsComponent,
       },
     ],
   },
