@@ -33,11 +33,20 @@ public class IProductServiceImpl implements IProductService {
 	public Product save(Product product) {
 		return productDao.save(product);
 	}
-
+	
+	/**
+	 * Elimina un cliente
+	 */
 	@Override
 	@Transactional
 	public void delete(Long id) {
 		productDao.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Product> findByName(String term) {
+		return productDao.findByNameContainingIgnoreCase(term);
 	}
 
 }

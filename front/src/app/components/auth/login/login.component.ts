@@ -8,11 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styles: [
     `
-      :host {
-        display: flex;
-        justify-content: center;
-        margin: 100px 0px;
-      }
+
       .mat-form-field {
         width: 100%;
         min-width: 300px;

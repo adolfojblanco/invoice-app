@@ -13,5 +13,8 @@ public interface IProductService {
 	public Product save(Product product);
 
 	public void delete(Long id);
+	
+	public List<Product> findByName(String term);
+	
 
 }

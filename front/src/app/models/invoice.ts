@@ -1,5 +1,5 @@
 import { Client } from './client';
-import { InvoiceItems } from './invoice-items';
+import { InvoiceItem } from './invoice-item';
 export class Invoice {
   id: number;
   description: string;
@@ -8,5 +8,5 @@ export class Invoice {
   updatedAt: string;
   grandTotal: number;
   client: Client;
-  items: InvoiceItems[];
+  items: InvoiceItem[] = [];
 }

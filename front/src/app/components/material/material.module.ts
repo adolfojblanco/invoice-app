@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   exports: [
@@ -29,6 +30,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatBadgeModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatAutocompleteModule,
   ],
 })
 export class MaterialModule {}

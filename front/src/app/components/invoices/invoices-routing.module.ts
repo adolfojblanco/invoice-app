@@ -7,19 +7,14 @@ import { InvoiceComponent } from './invoice/invoice.component';
 const routes: Routes = [
   {
     path: '',
-    component: InvoicesComponent,
     children: [
       {
         path: 'details/:id',
         component: InvoiceDetailsComponent,
       },
       {
-        path: 'new',
+        path: 'new/:id',
         component: InvoiceComponent,
-      },
-      {
-        path: 'new',
-        component: InvoiceDetailsComponent,
       },
     ],
   },

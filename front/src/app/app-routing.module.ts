@@ -1,33 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedComponent } from './components/shared/shared.component';
 import { AuthGuard } from './guards/auth.guard';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
-    path: '',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./components/home/home.module').then((m) => m.HomeModule),
+    path: 'home',
+    loadChildren: () => import('./components/home/home.module').then((h) => h.HomeModule),
   },
   {
     path: 'auth',
     loadChildren: () => import('./components/auth/auth.module').then((a) => a.AuthModule),
   },
   {
-    path: 'invoice',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('./components/invoices/invoices.module').then((i) => i.InvoicesModule),
+    path: '**',
+    redirectTo: 'auth',
   },
-  {
-    path: 'products',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('./components/products/products.module').then((p) => p.ProductsModule),
-  },
-  // {
-  //   path: '**',
-  //   redirectTo: 'auth',
-  // },
 ];
 
 @NgModule({
