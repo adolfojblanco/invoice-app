@@ -55,8 +55,9 @@ public class Client implements Serializable {
 	private String email;
 
 	/** ignoramos la relacion inversa **/
-	@JsonIgnoreProperties({"client", "hibernateLazyInitializer", "handler"})
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade=CascadeType.ALL)
+	
+	@JsonIgnoreProperties(value = { "client", "hibernateLazyInitializer", "handler" }, allowSetters = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL)
 	private List<Invoice> invoices;
 
 	@Column(name = "created_at")

@@ -54,7 +54,7 @@ export class ClientComponent implements OnInit {
 
   save() {
     if (this.clientForm.controls['id'].value) {
-      this.clientService.editClient(this.client).subscribe((res: any) => {
+      this.clientService.editClient(this.clientForm.value).subscribe((res: any) => {
         this.router.navigate(['/home/clients']);
         Swal.fire('Edición de Cliente', `${res.client.name}, editado correctamente`, 'success');
       });

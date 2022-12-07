@@ -40,7 +40,7 @@ public class Invoice implements Serializable {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({ "invoice", "hibernateLazyInitializer", "handler" })
+	@JsonIgnoreProperties(value = { "invoice", "hibernateLazyInitializer", "handler" }, allowSetters = true)
 	private Client client;
 
 	private String description;
