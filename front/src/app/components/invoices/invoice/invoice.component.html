@@ -1,13 +1,91 @@
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Number</mat-label>
+  <input type="text" placeholder="Pick one" aria-label="Number" matInput [(ngModel)]="termino" (input)="search()"
+    [matAutocomplete]="auto">
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selectedOption($event)">
+    <mat-option *ngFor="let product of products" [value]="product">
+      {{product.name}} | {{product.price | currency : 'EUR':'symbol':'.2-2':'es'}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
 
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Productos</mat-label>
-    <input type="text" matInput  [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option.name}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
+<mat-divider></mat-divider>
 
+<section class="h-100 gradient-custom">
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center my-4">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Factura - {{invoice.items.length}} items</h5>
+          </div>
+          <div class="card-body">
+            <!-- Single item -->
+            <div class="row">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of invoice.items">
+                    <th scope="row">1</th>
+                    <td>{{item.product.name}}</td>
+                    <td>{{item.product.price | currency : 'EUR':'symbol':'.2-2':'es'}}</td>
+                    <td><input type="number" value="{{item.quantity}}" class="form-control col-2"
+                        (change)="updateQuantity(item.product.id, $event)">
+                    </td>
+                    <td>{{item.total}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <p><strong>Comentarios:</strong></p>
+            <p class="mb-0">12.10.2020 - 14.10.2020</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0"><strong>Resumen de la factura</strong></h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                <span>{{invoice.grandTotal | currency : 'EUR':'symbol':'.2-2':'es'}}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Shipping
+                <span>Gratis</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total</strong>
+                  <strong>
+                    <p class="mb-0">(Incluye IVA)</p>
+                  </strong>
+                </div>
+                <span><strong>{{invoice.grandTotal + (invoice.grandTotal * 0.21) | currency : 'EUR':'symbol':'.2-2':'es'
+                    }}</strong></span>
+              </li>
+            </ul>
+
+            <button mat-raised-button color="primary" (click)="saveInvoice()"  [disabled]="invoice.grandTotal == 0">Guardar Factura</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

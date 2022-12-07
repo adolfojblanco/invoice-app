@@ -6,7 +6,7 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
 import { MaterialModule } from '../material/material.module';
 import { SharedComponent } from '../shared/shared.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [InvoiceDetailsComponent, InvoiceComponent],

@@ -25,6 +25,28 @@ export class ProductsService {
     });
   }
 
+  /**
+   * Busqueda de un producto por el nombre
+   * @param term termino de busqueda
+   * @returns product[]
+   */
+  searchProduct(term: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.urlEndPoint}/search/${term}`, {
+      headers: this.authService.getToken(),
+    });
+  }
+
+  /**
+   * Busqueda de un producto por su id
+   * @param id del producto
+   * @returns product
+   */
+  findById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.urlEndPoint}/${id}`, {
+      headers: this.authService.getToken(),
+    });
+  }
+
   deleteProduct(id: number): Observable<Product> {
     return this.http
       .delete<Product>(`${this.urlEndPoint}/${id}`, {

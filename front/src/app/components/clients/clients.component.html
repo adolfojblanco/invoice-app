@@ -39,7 +39,7 @@
       <button mat-raised-button color="warn" (click)="deleteClient(element)" class="mx-2">Eliminar</button>
       <button mat-raised-button color="primary" class="primary mx-2"
         [routerLink]="['/home/clients/details', element.id]">Detalle</button>
-      <button mat-raised-button class="mx-2" [routerLink]="['/home/invoice/new']">Nueva
+      <button mat-raised-button class="mx-2" [routerLink]="['/home/invoice/new', element.id]">Nueva
         Factura</button>
     </td>
   </ng-container>

@@ -20,6 +20,12 @@ export class InvoicesService {
     });
   }
 
+  createInvoice(invoice: Invoice, id: number): Observable<Invoice> {
+    return this.http.post<Invoice>(`${this.urlEndPoint}/${id}`, invoice, {
+      headers: this.authService.getToken(),
+    });
+  }
+
   /**
    * Obtiene una factura por su id
    * @param id invoice

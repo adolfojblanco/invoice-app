@@ -75,7 +75,7 @@ public class ProducRestController {
 		// response.put("product", newProduct);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/products/filter/{term}")
 	public List<Product> filterProducts(@PathVariable String term) {
 		return productService.findByName(term);
@@ -83,6 +83,7 @@ public class ProducRestController {
 
 	/**
 	 * Elimina un producto de la BD.
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -99,6 +100,45 @@ public class ProducRestController {
 		}
 		response.put("message", "Producto eliminado correctamente");
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+
+	/**
+	 * Busca un producto por su id en la bd
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/products/{id}")
+	public ResponseEntity<?> findById(@PathVariable Long id) {
+		Map<String, Object> response = new HashMap<>();
+		Product product = null;
+		try {
+			product = productService.findById(id);
+		} catch (DataAccessException e) {
+			response.put("message", "Se produjo un error al consultar en la bd");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		if (product == null) {
+			response.put("message",
+					"El producto con el id: ".concat(id.toString().concat(" no existe en la base de datos")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		response.put("product", product);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+
+	/**
+	 * Busca un producto en la BD por el nombre
+	 * 
+	 * @return
+	 */
+
+	@GetMapping("/products/search/{term}")
+	public List<Product> searchProduts(@PathVariable String term) {
+		return productService.findByName(term);
 	}
 
 }
