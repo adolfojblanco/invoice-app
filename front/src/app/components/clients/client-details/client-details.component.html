@@ -5,7 +5,7 @@
       <mat-card-header>
         <mat-card-title class="">{{client.name}} {{client.surname1}}</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content *ngIf="client?.image">
         <img class="img" src="http://localhost:8080/api/clients/image/{{client.image}}" alt="{{client.name}}">
       </mat-card-content>
       <mat-card-actions>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClientsService } from 'src/app/services/clients.service';
-import { switchMap } from 'rxjs';
+import { empty, switchMap } from 'rxjs';
 import { Client } from '../../../models/client';
 import Swal from 'sweetalert2';
 import { InvoicesService } from '../../../services/invoices.service';
@@ -19,7 +19,7 @@ import { InvoicesService } from '../../../services/invoices.service';
 })
 export class ClientDetailsComponent implements OnInit {
   panelOpenState = false;
-  selectedFile: File;
+  selectedFile: File | null;
   client: Client = new Client();
   dataSource = this.client.invoices;
 
@@ -30,7 +30,6 @@ export class ClientDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.clientService.getClient(id)))
       .subscribe((client) => {
@@ -43,13 +42,17 @@ export class ClientDetailsComponent implements OnInit {
 
   selectedPicture(event: any) {
     this.selectedFile = event.target.files[0];
+    if (this.selectedFile!.type.indexOf('image') < 0) {
+      Swal.fire('Error', 'Debes seleccionar una imagen valida', 'error');
+      this.selectedFile = null;
+    }
   }
 
   /**
    * Subir foto
    */
   savedPicture() {
-    this.clientService.uploadImage(this.selectedFile, this.client.id).subscribe((res) => {
+    this.clientService.uploadImage(this.selectedFile!, this.client.id).subscribe((res) => {
       this.client = res;
     });
   }
