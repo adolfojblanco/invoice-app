@@ -6,9 +6,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -22,18 +20,16 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		.antMatchers("/api/clients/image/**").permitAll()
+		http.authorizeRequests().antMatchers("/api/clients/image/**").permitAll()
 //		.antMatchers(HttpMethod.GET, "/api/clients/**").hasAnyRole("ADMIN, USER")
 //		.antMatchers(HttpMethod.GET, "/api/clients/**").hasRole("ADMIN")
-		.anyRequest().authenticated();
+				.anyRequest().authenticated();
 	}
 
 	@Bean
 	public CorsConfigurationSource corsConfiguationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(
-				Arrays.asList("http://localhost:4200", "https://invoice.querotemoito.es"));
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "https://invoice.querotemoito.es"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
